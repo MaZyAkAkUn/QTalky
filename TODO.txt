@@ -1,0 +1,5 @@
+QCryptoTalk - Instant messenger with end to end OTP encryption(P2P, client can be a host)
+1. [DONE] make basic gui stuff for message sending and displaing
+2. Make bassic Network Stuff for message sending/receiving
+2.1 add state info about clients sockets
+3. Make proper client connection handfling, and disconnection
