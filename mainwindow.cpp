@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     te_messages->setReadOnly(true);
     ly_main->addWidget(te_messages);
 
+    le_nickname = new QLineEdit("no_name");
+
     QHBoxLayout* ly_sendMessage = new QHBoxLayout();
     le_messageField = new QLineEdit();
     pb_sendMessage = new QPushButton("Send");
@@ -39,11 +41,21 @@ MainWindow::MainWindow(QWidget *parent)
     lb_clientStatusLb = new QLabel("Client status: ");
     lb_clientStatus = new QLabel("Offline");
     ly_clientControl->addRow(lb_clientStatusLb, lb_clientStatus);
+
+    pb_fetchAvailableServers = new QPushButton("Fetch Servers");
+    connect(pb_fetchAvailableServers, &QPushButton::clicked, this, [this](){
+        emit this->gui_fetchAvailableServersRequested();
+    });
+    cb_availableServers = new QComboBox();
+    ly_clientControl->addRow(pb_fetchAvailableServers, cb_availableServers);
+
     le_serverAddress = new QLineEdit();
     pb_connectToServer = new QPushButton("Connect");
     ly_clientControl->addRow(le_serverAddress, pb_connectToServer);
 
     ly_main->addLayout(ly_clientControl);
+    ly_main->addWidget(le_nickname);
+
 
     connect(pb_sendMessage, &QPushButton::clicked, this, &MainWindow::sendMessage);
 
@@ -115,6 +127,15 @@ void MainWindow::gui_clientStateChanged(QString clientId, int state)
         te_messages->insertHtml("<span style='color:red;'>" + QString(clientId + ": dissconnected") + "</span><br>");
     }
 
+
+}
+
+void MainWindow::gui_fillAvailableServers(QStringList servers)
+{
+    //here we fill fetched servers
+
+    cb_availableServers->addItems(servers);
+    qDebug()<<"Fetched "<<servers.size()<<" servers.";
 
 }
 

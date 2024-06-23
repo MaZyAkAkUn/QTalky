@@ -1,5 +1,18 @@
 QCryptoTalk - Instant messenger with end to end OTP encryption(P2P, client can be a host)
 1. [DONE] make basic gui stuff for message sending and displaing
-2. Make bassic Network Stuff for message sending/receiving
-2.1 add state info about clients sockets
-3. Make proper client connection handfling, and disconnection
+2. [DONE]Make bassic Network Stuff for message sending/receiving
+2.1 [DONE] add state info about clients sockets
+3. [50%]Make proper client connection handfling, and disconnection
+4. Lets make a messageing protocol
+I`m want make it based on json for basic struct and validation, next json string will be encoded via base64 algo and passed as a string to sockets
+Messages will be simply splited with strings ends
+or maybe  add some custom sppliter like in HTTP
+
+Protocol example:
+ {
+    "from" : user_id,
+    "text": "SOME TEXT"
+}/00
+//For now lets add a xmpp proto support to not invent a reower)
+
+

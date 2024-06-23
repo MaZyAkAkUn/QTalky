@@ -8,6 +8,9 @@
 #include <QHostAddress>
 #include <QHostInfo>
 #include <QTimer>
+#include <QFile>
+
+
 class QTalkClient : public QObject
 {
     Q_OBJECT
@@ -18,6 +21,8 @@ public slots:
     void connectToServer(QString serverAddress, quint16 port);
     void dissconnectFromServer();
     void sendMessage(QString message);
+    void fetchAvailableServers();
+
 private:
     QTcpSocket* clientSocket;
     QTimer *messageCheckTimer;
@@ -27,7 +32,7 @@ private:
 signals:
     void clientStateChanged(QString state);
     void newMessageReceived(QString messageData);
-
+    void availableServersFetched(QStringList servers);
 };
 
 #endif // QTALKCLIENT_H

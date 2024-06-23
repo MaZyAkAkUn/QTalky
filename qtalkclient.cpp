@@ -52,6 +52,22 @@ void QTalkClient::sendMessage(QString message)
 
 }
 
+void QTalkClient::fetchAvailableServers()
+{
+    //here we fetch from inet or file a list of available jabber servers for xmpp proto
+
+
+    //lets just read this list from file for start
+    QFile serverListFile("C:/Users/Andriyko/Documents/servers.txt");
+    serverListFile.open(QFile::ReadOnly);
+    auto serverListData = serverListFile.readAll();
+
+    auto serverListStr = QString::fromStdString(serverListData.toStdString());
+    auto serverList = serverListStr.split("\r\n", Qt::SkipEmptyParts);
+    emit availableServersFetched(serverList);
+
+}
+
 void QTalkClient::checkAvailableMessages()
 {
     if(clientSocket->bytesAvailable() > 0){

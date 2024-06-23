@@ -9,6 +9,8 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QFormLayout>
+#include <QComboBox>
+
 
 class MainWindow : public QMainWindow
 {
@@ -25,6 +27,8 @@ public slots:
     void gui_newMessageReceivedSimple(QString messageData);
     void gui_clientStateChanged(QString clientId, int state);
 
+    void gui_fillAvailableServers(QStringList servers);
+
 signals:
     void gui_runServerRequested();
     void gui_stopServerRequested();
@@ -33,6 +37,8 @@ signals:
     void gui_dissconnectFromServerRequested();
 
     void gui_sendMessageRequested(QString message);
+
+    void gui_fetchAvailableServersRequested();
 private:
     QTextEdit* te_messages;
     QPushButton* pb_sendMessage;
@@ -45,13 +51,18 @@ private:
     QLabel* lb_serverStatus;
     QPushButton* pb_switchServerState;
 
-
-
     QLabel* lb_clientStatusLb;
     QLabel* lb_clientStatus;
 
     QLineEdit* le_serverAddress;
     QPushButton* pb_connectToServer;
+
+    QLineEdit* le_nickname;
+
+    QPushButton* pb_fetchAvailableServers;
+    QComboBox* cb_availableServers;
+
+
 
 private slots:
     void sendMessage();
